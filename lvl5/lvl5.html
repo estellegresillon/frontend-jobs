@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Dropzone simple example</title>
+
+
+<div id="dropZone" style="width: 500px; height: 200px; background-color: red"></div>
+<p id="fileNameInput"></p>
+
+<script>
+
+const dropZone = document.getElementById('dropZone');
+
+// Optional.   Show the copy icon when dragging over.  Seems to only work for chrome.
+dropZone.addEventListener('dragover', function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+});
+
+// Get file data on drop
+dropZone.addEventListener('drop', function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    var files = e.dataTransfer.files; // Array of all files
+    console.log(files[0].name);
+    const fileNameInput = document.getElementById('fileNameInput');
+    const fileName = files[0].name;
+    fileNameInput.insertAdjacentHTML('beforeend', `${fileName}`);
+
+
+    for (var i=0, file; file=files[i]; i++) {
+        if (file.type.match(/image.*/)) {
+            var reader = new FileReader();
+
+            reader.onload = function(e2) {
+                // finished reading file data.
+                var img = document.createElement('img');
+                img.src= e2.target.result;
+                document.body.appendChild(img);
+            }
+
+            reader.readAsDataURL(file); // start reading the file data.
+        }
+    }
+});
+
+
+ const btnUpload = document.querySelector(".dz-image");
+
+  btnUpload.addEventListener('click', (event) => {
+    event.preventDefault();
+    fetch: fetch('https://fhirtest.uhn.ca/baseDstu3/Binary', { method: 'POST', body: myFile })
+      .then(response => response.json())
+      .then((data) => {
+        const keycode = data[0].Key;
+        picto.innerHTML = "";
+        temperatureField.innerHTML = "";
+        textField.innerHTML = "";
+        picto.insertAdjacentHTML('beforeend', ` <img src="https://developer.accuweather.com/sites/default/files/${icon}-s.png" alt="weather-icon">`);
+        temperatureField.insertAdjacentHTML('beforeend', `${data[0].Temperature.Metric.Value}°`);
+        textField.insertAdjacentHTML('beforeend', `${data[0].WeatherText}`);
+      });
+  });
+
+
+</script>

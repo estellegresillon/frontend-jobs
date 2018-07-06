@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Dropzone simple example</title>
+
+
+<div id="dropZone" style="width: 500px; height: 200px; background-color: red">DROPZONE</div>
+<p id="fileNameInput"></p>
+<p id="fileUploaded"></p>
+<p id="pause"></p>
+<div id="downloadMe"></div>
+<br>
+<p id="findTotal"></p>
+<div id="btn"></div>
+
+<script>
+
+const dropZone = document.getElementById('dropZone');
+const fileNameInput = document.getElementById('fileNameInput');
+const pause = document.getElementById('pause');
+const fileUploaded = document.getElementById('fileUploaded');
+const downloadMe = document.getElementById('downloadMe');
+const findTotal = document.getElementById('findTotal');
+const btn = document.getElementById('btn');
+
+dropZone.addEventListener('dragover', function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+});
+
+dropZone.addEventListener('drop', function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    var files = e.dataTransfer.files;
+
+    const fileName = files[0].name;
+
+    fetch('https://fhirtest.uhn.ca/baseDstu3/Binary', { method: 'POST', body: files[0] })
+      .then(response => response.json())
+      .then((data) => {
+        fileUploaded.insertAdjacentHTML('beforeend', "File created !")
+         api = fetch(`http://hapi.fhir.org/baseDstu3/Binary`)
+          .then(response => response.json())
+          .then((data) => {
+            downloadMe.insertAdjacentHTML('beforeend',
+              `<form action="https://fhirtest.uhn.ca/baseDstu3/Binary/${data.entry[0].resource.id}/_history/1">
+                <input type="submit" value="Download me !" />
+              </form>`)
+            findTotal.insertAdjacentHTML('beforeend', `(${data.total} files on the server)`)
+            btn.insertAdjacentHTML('beforeend', `<button>Reload page</button>`)
+          });
+      });
+
+});
+
+btn.addEventListener('click', function(e) {
+  location.reload();
+});
+
+</script>

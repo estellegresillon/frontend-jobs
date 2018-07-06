@@ -4,13 +4,13 @@
 
 
 <div id="dropZone" style="width: 500px; height: 200px; background-color: red">DROPZONE</div>
-<p id="fileNameInput"></p>
-<p id="fileUploaded"></p>
-<p id="pause"></p>
+<p><span id="fileNameInput"></span><span id="fileUploaded"></span></p>
+<br>
+<p>(<span id="findTotal"></span> files on the server) <span id="btn"><button>Reload page</button></span></p>
+<br>
+<p>Upload a picture to display it below :</p>
 <div id="downloadMe"></div>
 <br>
-<p id="findTotal"></p>
-<div id="btn"></div>
 
 <script>
 
@@ -21,6 +21,12 @@ const fileUploaded = document.getElementById('fileUploaded');
 const downloadMe = document.getElementById('downloadMe');
 const findTotal = document.getElementById('findTotal');
 const btn = document.getElementById('btn');
+
+fetch(`http://hapi.fhir.org/baseDstu3/Binary`)
+  .then(response => response.json())
+  .then((data) => {
+    findTotal.insertAdjacentHTML('beforeend', `${data.total}`);
+  });
 
 dropZone.addEventListener('dragover', function(e) {
     e.stopPropagation();
@@ -35,23 +41,38 @@ dropZone.addEventListener('drop', function(e) {
 
     const fileName = files[0].name;
 
-    fileNameInput.insertAdjacentHTML('beforeend', `<li>${fileName}</li>`);
+    fileNameInput.insertAdjacentHTML('beforeend', `${fileName}`);
 
     fetch('https://fhirtest.uhn.ca/baseDstu3/Binary', { method: 'POST', body: files[0] })
       .then(response => response.json())
       .then((data) => {
-        fileUploaded.insertAdjacentHTML('beforeend', "File created !")
-         api = fetch(`http://hapi.fhir.org/baseDstu3/Binary`)
+        fileUploaded.insertAdjacentHTML('beforeend', "- File created !")
+         fetch(`http://hapi.fhir.org/baseDstu3/Binary`)
           .then(response => response.json())
           .then((data) => {
             downloadMe.insertAdjacentHTML('beforeend',
               `<form action="https://fhirtest.uhn.ca/baseDstu3/Binary/${data.entry[0].resource.id}/_history/1">
                 <input type="submit" value="Download me !" />
               </form>`)
-            findTotal.insertAdjacentHTML('beforeend', `(${data.total} files on the server)`)
-            btn.insertAdjacentHTML('beforeend', `<button>Reload page</button>`)
+            findTotal.innerHTML = ""
+            findTotal.insertAdjacentHTML('beforeend', `${data.total}`);
           });
       });
+
+      for (var i=0, file; file=files[i]; i++) {
+        if (file.type.match(/image.*/)) {
+            var reader = new FileReader();
+
+            reader.onload = function(e2) {
+                // finished reading file data.
+                var img = document.createElement('img');
+                img.src= e2.target.result;
+                document.body.appendChild(img);
+            }
+
+            reader.readAsDataURL(file); // start reading the file data.
+        }
+    }
 
 });
 

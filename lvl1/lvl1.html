@@ -1,31 +1,24 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<title>Dropzone simple example</title>
+<html>
+  <head>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Dropzone simple example</title>
+    <link rel="stylesheet" type="text/css" href="lvl1.css">
 
-<div id="dropZone" style="width: 500px; height: 200px; background-color: red"></div>
-<p id="fileNameInput"></p>
+  </head>
 
-<script>
+  <body>
 
-const dropZone = document.getElementById('dropZone');
+    <div id="dropZone">
+      <p id="title">DROPZONE</p>
+      <p><span id="fileNameInput">Drag & drop any type of file</span><span id="fileUploaded"></span></p>
+    </div>
+    <br>
 
-// Optional.   Show the copy icon when dragging over.  Seems to only work for chrome.
-dropZone.addEventListener('dragover', function(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'copy';
-});
+    <script src="lvl1.js"></script>
 
-// Get file data on drop
-dropZone.addEventListener('drop', function(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    var files = e.dataTransfer.files; // Array of all files
-    console.log(files[0].name);
-    const fileNameInput = document.getElementById('fileNameInput');
-    const fileName = files[0].name;
-    fileNameInput.insertAdjacentHTML('beforeend', `${fileName}`);
-});
+  </body>
+</html>
 
-</script>

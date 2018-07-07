@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700,900|Open+Sans');
+
+/*Dropzone*/
+#dropZone {
+  width: 70%;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #FF0000;
+  border-radius: 10px;
+  transition: all 1s ease;
+  box-shadow: 0 2px 15px 0 rgba(0,0,0,0.4);
+  margin: 20px;
+  background-color: white;
+}
+
+#dropZone:hover {
+  box-shadow: 0 2px 20px 0 rgba(0,0,0,0.5);
+}
+
+#title {
+  font-weight: 900;
+  font-size: 32px;
+}
+
+#descr {
+  font-weight: 400;
+}
+
+
+/*Global*/
+body {
+  font-family: "Montserrat";
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  color: white;
+  flex-direction: column;
+  padding: 50px 0px 50px 0px;
+  background: linear-gradient(135deg, #ef7070 0%, #FF0000 100%);
+}

@@ -1,49 +1,32 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<title>Dropzone simple example</title>
+<html>
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Dropzone simple example</title>
+    <link rel="stylesheet" type="text/css" href="lvl2.css">
+
+  </head>
+
+  <body>
+
+    <div id="dropZone">
+      <p id="title">DROPZONE</p>
+      <p><span id="fileNameInput">Drag & drop any type of file</span><span id="fileUploaded"></span></p>
+    </div>
+    <br>
+
+        <div id="downloadMe">
+      <form class="inactive">
+        <input type="submit" value="Select a file" />
+      </form>
+    </div>
+    <br>
 
 
-<div id="dropZone" style="width: 500px; height: 200px; background-color: red"></div>
-<p id="fileNameInput"></p>
-<p id="fileUploaded"></p>
-<div id="downloadMe"></div>
+    <script src="lvl2.js"></script>
 
-<script>
+  </body>
+</html>
 
-const dropZone = document.getElementById('dropZone');
-const fileNameInput = document.getElementById('fileNameInput');
-const fileUploaded = document.getElementById('fileUploaded');
-const downloadMe = document.getElementById('downloadMe');
-
-// Optional.   Show the copy icon when dragging over.  Seems to only work for chrome.
-dropZone.addEventListener('dragover', function(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'copy';
-});
-
-// Get file data on drop
-dropZone.addEventListener('drop', function(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    var files = e.dataTransfer.files; // Array of all files
-
-    const fileName = files[0].name;
-
-    fileNameInput.insertAdjacentHTML('beforeend', `<li>${fileName}</li>`);
-    fetch('https://fhirtest.uhn.ca/baseDstu3/Binary', { method: 'POST', body: files[0] })
-      .then(response => response.json())
-      .then((data) => {
-        fileUploaded.insertAdjacentHTML('beforeend', "File created !")
-         fetch(`http://hapi.fhir.org/baseDstu3/Binary`)
-          .then(response => response.json())
-          .then((data) => {
-            downloadMe.insertAdjacentHTML('beforeend',
-              `<form action="https://fhirtest.uhn.ca/baseDstu3/Binary/${data.entry[0].resource.id}/_history/1">
-                <input type="submit" value="Download me !" />
-              </form>`)
-          });
-      });
-});
-
-</script>

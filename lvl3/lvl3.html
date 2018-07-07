@@ -1,16 +1,42 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<title>Dropzone simple example</title>
+<html>
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Dropzone simple example</title>
+    <link rel="stylesheet" type="text/css" href="lvl3.css">
+
+  </head>
+
+  <body>
+
+    <div id="dropZone">
+      <p id="title">DROPZONE</p>
+      <p><span id="fileNameInput">Drag & drop any type of file</span><span id="fileUploaded"></span></p>
+    </div>
+    <br>
+
+    <div class="tooltip">
+      <strong><span id="findTotal"></span> files on the server</strong>
+      <span class="tooltiptext">Upload can take up to 1 minute</span>
+    </div>
+    <br>
+    <div id="downloadMe">
+      <form>
+        <input type="submit" value="Select file" />
+      </form>
+    </div>
+    <br>
+    <p>Drag & drop a picture to display it below </p>
+    <div id="displayImg"></div>
 
 
-<div id="dropZone" style="width: 500px; height: 200px; background-color: red">DROPZONE</div>
-<p><span id="fileNameInput"></span><span id="fileUploaded"></span></p>
-<br>
-<p><strong><span id="findTotal"></span> files on the server</strong></p>
-<h5>It can take up to 1 minute for your file to be saved on the server</h5>
-<br>
-<p>Upload a picture to display it below :</p>
-<div id="downloadMe"></div>
-<br>
+    <script src="lvl3.js"></script>
 
-<script src="lvl3.js"></script>
+  </body>
+</html>
+
+
+
+

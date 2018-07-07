@@ -3,12 +3,12 @@
 /*Dropzone*/
 #dropZone {
   width: 70%;
-  height: 400px;
+  height: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  color: orange;
+  color: #FF0000;
   border-radius: 10px;
   transition: all 1s ease;
   box-shadow: 0 2px 15px 0 rgba(0,0,0,0.2);
@@ -30,21 +30,32 @@
 
 
 /*Download file*/
-#downloadMe input {
-
+#downloadMe .active input {
   border-radius: 15px;
   font-family: "Montserrat";
   color: white;
   border: none;
   padding: 10px 20px;
-  background-color: orange;
+  background: linear-gradient(135deg, #ef7070 0%, #FF0000 100%);
   transition: all 1s ease;
   box-shadow: 0 2px 6px 0 rgba(0,0,0,0.4);
 }
 
-#downloadMe input:hover {
-  background-color: red;
+#downloadMe .active:hover input {
+  background: linear-gradient(135deg, #FF0000 0%, #B22222 100%);
   box-shadow: 0 5px 10px 0 rgba(0,0,0,0.4);
+}
+
+#downloadMe .inactive input {
+  border-radius: 15px;
+  font-family: "Montserrat";
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  background: lightgray;
+  transition: all 1s ease;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.4);
+  pointer-events:none;
 }
 
 
@@ -61,7 +72,6 @@
 #displayImg img {
   width: 80%;
 }
-
 
 
 

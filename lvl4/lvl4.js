@@ -29,6 +29,9 @@ dropZone.addEventListener('drop', function(e) {
 
     fileNameInput.innerHTML = ""
     fileNameInput.insertAdjacentHTML('beforeend', `${fileName}`);
+    gif.insertAdjacentHTML(
+      'beforeend',
+      `<img src="../oneloop.gif">`)
 
     fetch('https://fhirtest.uhn.ca/baseDstu3/Binary', { method: 'POST', body: files[0] })
       .then(response => response.json())

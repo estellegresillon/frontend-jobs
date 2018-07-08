@@ -1,5 +1,6 @@
 const dropZone = document.getElementById('dropZone');
 const fileNameInput = document.getElementById('fileNameInput');
+const gif = document.getElementById('gif');
 
 dropZone.addEventListener('dragover', function(e) {
     e.stopPropagation();
@@ -16,4 +17,7 @@ dropZone.addEventListener('drop', function(e) {
 
     fileNameInput.innerHTML = ""
     fileNameInput.insertAdjacentHTML('beforeend', `${fileName}`);
+    gif.insertAdjacentHTML(
+      'beforeend',
+      `<img src="../oneloop.gif">`)
 });

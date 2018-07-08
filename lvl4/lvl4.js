@@ -71,3 +71,24 @@ window.setInterval(function(){
     });
 }, 1000);
 
+
+fetched.addEventListener('click', function(e) {
+  fetch(`http://hapi.fhir.org/baseDstu3/Binary`)
+    .then(response => response.json())
+    .then((data) => {
+      const files = data.entry
+      download.innerHTML = ""
+      start = 0
+      files.forEach(function(i) {
+        // console.log(i)
+        start ++
+        download.insertAdjacentHTML(
+          'beforeend',
+          `<div class="${i.resource.id}">
+            <a href="${i.fullUrl}">${start} - Download</a>
+          </div>`)
+        console.log(i.fullUrl)
+        console.log(i)
+      })
+      });
+});

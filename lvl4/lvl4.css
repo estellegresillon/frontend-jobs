@@ -30,6 +30,47 @@
 }
 
 
+/*Download file*/
+#fetched {
+  border-radius: 25px;
+  font-family: "Montserrat";
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #ef7070 0%, #FF0000 100%);
+  transition: all 1s ease;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.4);
+  font-size: 14px;
+}
+
+#fetched:hover {
+  background: linear-gradient(135deg, #FF0000 0%, #B22222 100%);
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.4);
+}
+
+#download {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+}
+
+#download div {
+  margin: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: white;
+}
+
+#download div a {
+  color: white;
+}
+
 /* Image */
 #displayImg {
   width: 100%;

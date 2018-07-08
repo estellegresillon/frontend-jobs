@@ -32,16 +32,12 @@ dropZone.addEventListener('drop', function(e) {
     fetch('https://fhirtest.uhn.ca/baseDstu3/Binary', { method: 'POST', body: files[0] })
       .then(response => response.json())
       .then((data) => {
+        downloadMe.innerHTML = ""
         fileUploaded.innerHTML = ""
         fileUploaded.insertAdjacentHTML('beforeend', " - <strong>File created !</strong>")
          fetch(`http://hapi.fhir.org/baseDstu3/Binary`)
           .then(response => response.json())
           .then((data) => {
-            downloadMe.innerHTML = ""
-            downloadMe.insertAdjacentHTML('beforeend',
-              `<form class="active" action="https://fhirtest.uhn.ca/baseDstu3/Binary/${data.entry[0].resource.id}/_history/1">
-                <input type="submit" value="Download file" />
-              </form>`)
             findTotal.innerHTML = ""
             findTotal.insertAdjacentHTML('beforeend', `${data.total}`);
           });
@@ -60,14 +56,14 @@ dropZone.addEventListener('drop', function(e) {
             displayImg.appendChild(img);
           }
 
-          reader.readAsDataURL(file); // start reading the file data.
+          reader.readAsDataURL(file);
         }
     }
 
 });
 
 window.setInterval(function(){
-  /// call your function here
+
   fetch(`http://hapi.fhir.org/baseDstu3/Binary`)
     .then(response => response.json())
     .then((data) => {

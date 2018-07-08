@@ -25,14 +25,5 @@ dropZone.addEventListener('drop', function(e) {
       .then((data) => {
         fileUploaded.innerHTML = ""
         fileUploaded.insertAdjacentHTML('beforeend', " - <strong>File created !</strong>")
-         fetch(`http://hapi.fhir.org/baseDstu3/Binary`)
-          .then(response => response.json())
-          .then((data) => {
-            downloadMe.innerHTML = ""
-            downloadMe.insertAdjacentHTML('beforeend',
-              `<form class="active" action="https://fhirtest.uhn.ca/baseDstu3/Binary/${data.entry[0].resource.id}/_history/1">
-                <input type="submit" value="Download file" />
-              </form>`)
-          });
       });
 });

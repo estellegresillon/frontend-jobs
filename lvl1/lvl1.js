@@ -20,5 +20,7 @@ dropZone.addEventListener('drop', function(e) {
     gif.innerHTML = ""
     gif.insertAdjacentHTML(
       'beforeend',
-      `<img src="../oneloop.gif">`)
+      `<img class="gifImg" src="../oneloop.gif">`)
+    const gifImg = document.querySelector('.gifImg')
+    gifImg.src = gifImg.src.replace(/\?.*$/,"")+"?x="+Math.random();
 });

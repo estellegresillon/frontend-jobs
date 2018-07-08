@@ -6,6 +6,7 @@ const download = document.getElementById('download');
 const fetched = document.getElementById('fetched');
 const findTotal = document.getElementById('findTotal');
 const btn = document.getElementById('btn');
+const gif = document.getElementById('gif');
 
 
 fetch(`http://hapi.fhir.org/baseDstu3/Binary`)
@@ -29,9 +30,12 @@ dropZone.addEventListener('drop', function(e) {
 
     fileNameInput.innerHTML = ""
     fileNameInput.insertAdjacentHTML('beforeend', `${fileName}`);
+    gif.innerHTML = ""
     gif.insertAdjacentHTML(
       'beforeend',
-      `<img src="../oneloop.gif">`)
+      `<img class="gifImg" src="../oneloop.gif">`)
+    const gifImg = document.querySelector('.gifImg')
+    gifImg.src = gifImg.src.replace(/\?.*$/,"")+"?x="+Math.random();
 
     fetch('https://fhirtest.uhn.ca/baseDstu3/Binary', { method: 'POST', body: files[0] })
       .then(response => response.json())

@@ -17,6 +17,7 @@ dropZone.addEventListener('drop', function(e) {
 
     fileNameInput.innerHTML = ""
     fileNameInput.insertAdjacentHTML('beforeend', `${fileName}`);
+    gif.innerHTML = ""
     gif.insertAdjacentHTML(
       'beforeend',
       `<img src="../oneloop.gif">`)

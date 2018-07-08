@@ -15,6 +15,7 @@ dropZone.addEventListener('drop', function(e) {
 
     const fileName = files[0].name;
 
+    displayImg.innerHTML = ""
     fileNameInput.innerHTML = ""
     fileNameInput.insertAdjacentHTML('beforeend', `${fileName}`);
     gif.innerHTML = ""
